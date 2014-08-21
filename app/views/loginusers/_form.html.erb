@@ -1,0 +1,25 @@
+<%= form_for(@loginuser) do |f| %>
+  <% if @loginuser.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@loginuser.errors.count, "error") %> prohibited this loginuser from being saved:</h2>
+
+      <ul>
+      <% @loginuser.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :'Email Id' %><br />
+    <%= f.text_field :emailId %>
+  </div>
+  <div class="field">
+    <%= f.label :Password %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="actions">
+    <%= f.submit :Login %>
+  </div>
+<% end %>

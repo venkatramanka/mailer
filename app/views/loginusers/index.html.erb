@@ -1,0 +1,27 @@
+<h1>Listing loginusers</h1>
+
+<table>
+  <tr>
+    <th>Emailid</th>
+    <th>Password</th>
+    <th>User</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @loginusers.each do |loginuser| %>
+  <tr>
+    <td><%= loginuser.emailId %></td>
+    <td><%= loginuser.password %></td>
+    <td><%= loginuser.user_id %></td>
+    <td><%= link_to 'Show', loginuser %></td>
+    <td><%= link_to 'Edit', edit_loginuser_path(loginuser) %></td>
+    <td><%= link_to 'Destroy', loginuser, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Loginuser', new_loginuser_path %>
