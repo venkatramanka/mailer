@@ -21,8 +21,9 @@ class LoginusersController < ApplicationController
     @user = User.where(emailId: @mailid)[0]
     if(@user!=nil && @user.password == @loginuser.password)
       session[:mailid] = @mailid
+      session[:type]="Inbox"
       @loginuser.destroy
-      redirect_to(mails_path, :notice => session[:mailid]+" Successfully Logged in.") and return
+      redirect_to(mails_path) and return
     else
       @loginuser.destroy
       redirect_to(new_loginuser_path, :notice => "Invalid Login Credentials") and return
@@ -33,6 +34,9 @@ class LoginusersController < ApplicationController
   # GET /loginusers/new
   # GET /loginusers/new.json
   def new
+    if(params["session"] == 'nil')
+      session[:mailid] = nil
+    end
     @loginuser = Loginuser.new
     respond_to do |format|
       format.html # new.html.erb

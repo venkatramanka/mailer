@@ -1,11 +1,17 @@
-<h2><i>Inbox</i></h2>
+<h2><i><%= @type %></i></h2>
 
-<table>
+<table style="text-align:center">
   <tr>
-    <th>From</th>
-    <th>To</th>
-    <th>Subject</th>
-    <th>Message</th>
+    <th width=70>
+      <% if @type=='Inbox'%>
+        <%="From"%>
+      <%else%>
+        <%="To"%>
+      <%end%>
+    </th>
+    <!--<th>To</th>-->
+    <th width=100>Subject</th>
+    <th width=200>Message</th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,16 +20,18 @@
 <% @mails.each do |mail| %>
   <tr>
     <td><%= mail.from %></td>
-    <td><%= mail.to %></td>
+    <!--<td><%= mail.to %></td>-->
     <td><%= mail.subject %></td>
-    <td><%= mail.message %></td>
-    <td><%= link_to 'Show', mail %></td>
-    <td><%= link_to 'Edit', edit_mail_path(mail) %></td>
-    <td><%= link_to 'Destroy', mail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= mail.message[0..12]+"..." %></td>
+    <td><%= link_to 'Read', mail %></td>
+    <td><%= link_to 'Reply', new_mail_path(:to => mail.from) %></td>
+    <td><%= link_to 'Delete', mail, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
-
+<% if(@mails.size==0) %>
+  <p><i> No new messages </i></p>
+<% end %>
 <br />
 
 <%= link_to 'Compose', new_mail_path %>

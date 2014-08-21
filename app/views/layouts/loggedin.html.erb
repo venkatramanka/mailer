@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mailer</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <%= link_to 'Inbox', mails_path(:type => 'Inbox') %>
+  <%= link_to 'Sent Mail', mails_path(:type => 'Sent Mail') %>
+  <%= link_to 'Logout', new_loginuser_path(:session => 'nil') %>
+</head>
+<body>
+<% if flash[:notice] %>
+	<%= flash[:notice] %>
+<% end %>
+<%= yield %>
+
+</body>
+</html>

@@ -1,9 +1,17 @@
 class MailsController < ApplicationController
   # GET /mails
   # GET /mails.json
+  layout 'loggedin'
   def index
-    @mails = Mail.where(:to => session[:mailid])
-
+    @type = params["type"] || session[:type]
+    if(@type == 'Inbox')
+      @mails = Mail.where(:to => session[:mailid])
+      #session[:type]=nil
+    elsif(@type == 'Sent Mail')
+      @mails = Mail.where(:from => session[:mailid])
+      #session[:type]=nil
+    end
+    #session[:mailid] = nil
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @mails }
@@ -25,6 +33,7 @@ class MailsController < ApplicationController
   # GET /mails/new.json
   def new
     @mail = Mail.new
+    @mail.to = params[:to]
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @mail }
