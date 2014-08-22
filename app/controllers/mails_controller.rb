@@ -9,7 +9,11 @@ class MailsController < ApplicationController
       #session[:type]=nil
     elsif(@type == 'Sent Mail')
       @mails = Mail.where(:from => session[:mailid])
+      @mails2 = Mail.all.select{|j| j[:to] =~ /.*!/i}
+      @mails -= @mails2
       #session[:type]=nil
+    elsif(@type == 'Drafts')
+      @mails = Mail.all.select{|j| j[:to] =~ /.*!/i}
     end
     #session[:mailid] = nil
     respond_to do |format|
@@ -50,9 +54,11 @@ class MailsController < ApplicationController
   def create
     @mail = Mail.new(params[:mail])
     @mail.update_attribute(:from, session[:mailid])
+    
     respond_to do |format|
+     
       if @mail.save
-        format.html { redirect_to @mail, notice: 'Mail was successfully created.' }
+        format.html { redirect_to @mail, notice: 'Mail successfully sent.' }
         format.json { render json: @mail, status: :created, location: @mail }
       else
         format.html { render action: "new" }
@@ -65,10 +71,11 @@ class MailsController < ApplicationController
   # PUT /mails/1.json
   def update
     @mail = Mail.find(params[:id])
-
+    @to = @mail.to[0..-2]
     respond_to do |format|
+      @mail.update_attribute(:to, @to)
       if @mail.update_attributes(params[:mail])
-        format.html { redirect_to @mail, notice: 'Mail was successfully updated.' }
+        format.html { redirect_to @mail, notice: 'Mail was successfully sent.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

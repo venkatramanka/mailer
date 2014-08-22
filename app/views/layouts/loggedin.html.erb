@@ -7,6 +7,7 @@
   <%= csrf_meta_tags %>
   <%= link_to 'Inbox', mails_path(:type => 'Inbox') %>
   <%= link_to 'Sent Mail', mails_path(:type => 'Sent Mail') %>
+  <%= link_to 'Drafts', mails_path(:type => 'Drafts') %>
   <%= link_to 'Logout', new_loginuser_path(:session => 'nil') %>
 </head>
 <body>

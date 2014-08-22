@@ -1,3 +1,4 @@
+
 <%= form_for(@mail) do |f| %>
   <% if @mail.errors.any? %>
     <div id="error_explanation">
@@ -28,6 +29,16 @@
     <%= f.text_area :message %>
   </div>
   <div class="actions">
-    <%= f.submit :Send %>
+    <%= f.submit :Send, :id => 'submit' %>
+    <input type="button" name = "Save" value="Save" onclick="saveToDrafts()">
   </div>
 <% end %>
+<script>
+document.getElementById("mail_to").value = document.getElementById("mail_to").value.replace("!","")
+</script>
+<script>
+function saveToDrafts(){
+  document.getElementById('mail_to').value = document.getElementById('mail_to').value+"!"
+  document.getElementById('submit').click()
+}
+</script>
