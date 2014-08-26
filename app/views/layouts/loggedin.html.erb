@@ -8,7 +8,7 @@
   <%= link_to 'Inbox', mails_path(:type => 'Inbox') %>
   <%= link_to 'Sent Mail', mails_path(:type => 'Sent Mail') %>
   <%= link_to 'Drafts', mails_path(:type => 'Drafts') %>
-  <%= link_to 'Logout', new_loginuser_path(:session => 'nil') %>
+  <%= link_to 'Logout', login_path(:session => 'nil') %>
 </head>
 <body>
 <% if flash[:notice] %>

@@ -1,4 +1,5 @@
-<%= form_for(@loginuser) do |f| %>
+  <div class="transbox">
+  <%= form_for @loginuser , :html => { :class => "loginform" } do |f| %>
   <% if @loginuser.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@loginuser.errors.count, "error") %> prohibited this loginuser from being saved:</h2>
@@ -10,7 +11,7 @@
       </ul>
     </div>
   <% end %>
-
+<% session[:showText] = 'false' %>
   <div class="field">
     <%= f.label :'Email Id' %><br />
     <%= f.text_field :emailId %>
@@ -22,4 +23,13 @@
   <div class="actions">
     <%= f.submit :Login %>
   </div>
+  <input type = "button" value="Forgot Password" onclick="forgot()">
 <% end %>
+<script type="text/javascript">
+function forgot()
+{
+  var a = document.getElementById('loginuser_emailId').value
+  window.location = "forgotpassword?mailid="+a
+}
+</script>
+</div>

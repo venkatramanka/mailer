@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140821144309) do
+ActiveRecord::Schema.define(:version => 20140822173507) do
+
+  create_table "forgotusers", :force => true do |t|
+    t.string   "securityQuestion"
+    t.string   "securityAnswer"
+    t.string   "newPassword"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "loginusers", :force => true do |t|
     t.string   "emailId"

@@ -26,7 +26,7 @@ class LoginusersController < ApplicationController
       redirect_to(mails_path) and return
     else
       @loginuser.destroy
-      redirect_to(new_loginuser_path, :notice => "Invalid Login Credentials") and return
+      redirect_to(login_path, :notice => "Invalid Login Credentials") and return
     end
     end
   end

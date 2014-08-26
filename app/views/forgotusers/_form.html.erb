@@ -1,0 +1,43 @@
+<%= form_for(@forgotuser) do |f| %>
+  <% if @forgotuser.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@forgotuser.errors.count, "error") %> prohibited this forgotuser from being saved:</h2>
+
+      <ul>
+      <% @forgotuser.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<%= @showText %>
+  
+  <% if(@showText == 'false') %>
+  <div class="field">
+    <%= f.label :'securityQuestion : '%>   <%= @question %>
+  </div>
+  <div class="field">
+    <%= f.label :securityAnswer %><br />
+    <%= f.text_field :securityAnswer %>
+  </div>
+    <div class="field" style="visibility:hidden">
+      <%= f.label :newPassword %><br />
+      <%= f.text_field :newPassword %>
+    </div>
+  <%elsif(@showText == 'true')%>
+  <div class="field" style="visibility:hidden">
+    <%= f.label :securityQuestion %>   <%= @question %>
+  </div>
+  <div class="field" style="visibility:hidden">
+    <%= f.label :securityAnswer %><br />
+    <%= f.text_field :securityAnswer %>
+  </div>
+    <div class="field">
+      <%= f.label :newPassword %><br />
+      <%= f.text_field :newPassword %>
+    </div>
+  <%end%>
+  <div class="actions">
+    <%= f.submit :'Submit'%>
+  </div>
+<% end %>

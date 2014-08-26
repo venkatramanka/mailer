@@ -1,4 +1,7 @@
 Mailer::Application.routes.draw do
+  resources :forgotusers
+
+
   resources :loginusers
 
 
@@ -9,8 +12,9 @@ Mailer::Application.routes.draw do
 
   get '/signup' => 'users#new'
   get '/compose' =>'mails#new'
-  get '/login' => 'loginusers#new'
-
+  get '/login' => 'loginusers#new', as: 'login'
+  get '/forgotpassword' => 'forgotusers#new'
+  match "/loginusers/new" => redirect("login")
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

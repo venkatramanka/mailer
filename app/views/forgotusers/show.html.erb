@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Securityquestion:</b>
+  <%= @forgotuser.securityQuestion %>
+</p>
+
+<p>
+  <b>Securityanswer:</b>
+  <%= @forgotuser.securityAnswer %>
+</p>
+
+<p>
+  <b>Newpassword:</b>
+  <%= @forgotuser.newPassword %>
+</p>
+
+
+<%= link_to 'Edit', edit_forgotuser_path(@forgotuser) %> |
+<%= link_to 'Back', forgotusers_path %>
